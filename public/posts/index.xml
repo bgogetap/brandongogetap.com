@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Brandon Gogetap | Blog</title>
+        <link>https://www.brandongogetap.com/posts/</link>
+        <description>All Posts | Brandon Gogetap | Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 26 Nov 2022 22:44:29 -0800</lastBuildDate><atom:link href="https://www.brandongogetap.com/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>YouTube Channel</title>
+    <link>https://www.brandongogetap.com/posts/youtube-channel/</link>
+    <pubDate>Sat, 26 Nov 2022 22:44:29 -0800</pubDate>
+    <author>Brandon</author>
+    <guid>https://www.brandongogetap.com/posts/youtube-channel/</guid>
+    <description><![CDATA[Dagger 2 Deep Dive and other Android development videos]]></description>
+</item>
+</channel>
+</rss>
