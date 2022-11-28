@@ -3,13 +3,21 @@
         <title>Brandon Gogetap | Blog</title>
         <link>https://www.brandongogetap.com/</link>
         <description>Android Development Musings</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 26 Nov 2022 22:44:29 -0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Nov 2022 12:00:00 -0800</lastBuildDate>
             <atom:link href="https://www.brandongogetap.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Gradle Auto Include Modules</title>
+    <link>https://www.brandongogetap.com/posts/gradle-auto-include/</link>
+    <pubDate>Mon, 28 Nov 2022 12:00:00 -0800</pubDate>
+    <author>Brandon Gogetap</author>
+    <guid>https://www.brandongogetap.com/posts/gradle-auto-include/</guid>
+    <description><![CDATA[Update your settings.gradle.kts to auto-include all modules in your project]]></description>
+</item>
+<item>
     <title>YouTube Channel</title>
     <link>https://www.brandongogetap.com/posts/youtube-channel/</link>
     <pubDate>Sat, 26 Nov 2022 22:44:29 -0800</pubDate>
-    <author>Brandon</author>
+    <author>Brandon Gogetap</author>
     <guid>https://www.brandongogetap.com/posts/youtube-channel/</guid>
     <description><![CDATA[Dagger 2 Deep Dive and other Android development videos]]></description>
 </item>

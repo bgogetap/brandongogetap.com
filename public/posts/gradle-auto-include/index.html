@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Gradle Auto Include Modules - Brandon Gogetap | Blog</title><meta name="Description" content="Android Development Musings"><meta property="og:title" content="Gradle Auto Include Modules" />
+<meta property="og:description" content="Update your settings.gradle.kts to auto-include all modules in your project" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brandongogetap.com/posts/gradle-auto-include/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-28T12:00:00-08:00" />
+<meta property="article:modified_time" content="2022-11-28T12:00:00-08:00" /><meta property="og:site_name" content="Brandon Gogetap | Blog" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Gradle Auto Include Modules"/>
+<meta name="twitter:description" content="Update your settings.gradle.kts to auto-include all modules in your project"/>
+<meta name="application-name" content="Brandon Gogetap">
+<meta name="apple-mobile-web-app-title" content="Brandon Gogetap"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://www.brandongogetap.com/posts/gradle-auto-include/" /><link rel="prev" href="https://www.brandongogetap.com/posts/youtube-channel/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gradle Auto Include Modules",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/www.brandongogetap.com\/posts\/gradle-auto-include\/"
+        },"genre": "posts","wordcount":  832 ,
+        "url": "https:\/\/www.brandongogetap.com\/posts\/gradle-auto-include\/","datePublished": "2022-11-28T12:00:00-08:00","dateModified": "2022-11-28T12:00:00-08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Brandon Gogetap"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Brandon Gogetap | Blog">Brandon Gogetap | Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Brandon Gogetap | Blog">Brandon Gogetap | Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title">Gradle Auto Include Modules</h1><div class="post-meta">
+            <div class="post-meta-line"></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-28">2022-11-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;832 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#intro">Intro</a></li>
+    <li><a href="#creating-a-module-with-the-wizard">Creating a module with the wizard</a></li>
+    <li><a href="#creating-a-module-with-a-script">Creating a module with a script</a>
+      <ul>
+        <li><a href="#using-the-snippet">Using the snippet</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#find-all-modules">Find all modules</a></li>
+        <li><a href="#execute">Execute</a></li>
+      </ul>
+    </li>
+    <li><a href="#potential-downsides">Potential downsides</a>
+      <ul>
+        <li><a href="#performance--build-time-impact">Performance / Build time impact</a></li>
+        <li><a href="#selective-include">Selective <code>include</code>?</a></li>
+      </ul>
+    </li>
+    <li><a href="#summary">Summary</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://youtu.be/msCs86Puh6c" target="_blank" rel="noopener noreffer ">This post in video form</a></p>
+<h2 id="intro">Intro</h2>
+<p>As someone who has become very accustomed to granular modules, I found having to add each module to the <code>settings.gradle</code> to be a mild annoyance, and figured there would be a simple way to get around that.</p>
+<p>This post essentially boils down to a snippet that you can add to your <code>settings.gradle.kts</code> file to auto-include all gradle modules present in your project.</p>
+<script type="application/javascript" src="https://gist.github.com/bgogetap/c1610fbb4f83e2953b541b838c47e62a.js"></script>
+
+<p>The rest of the words below just dig into how that works and why you may want it.</p>
+<hr>
+<h2 id="creating-a-module-with-the-wizard">Creating a module with the wizard</h2>
+<p>The standard way we add modules is via the built-in wizard in Android Studio/IntelliJ. This is pretty convenient, as it takes care of updating the <code>settings.gradle</code> file by adding the <code>include(...)</code> statement for your new module.</p>
+<p>However, in larger projects, and likely many of your own side projects, it is possible that you are not creating modules via the integrated New Module wizard, but rather with scripts that you&rsquo;ve created that take care of some specific logic you define for your company or personal project.</p>
+<h2 id="creating-a-module-with-a-script">Creating a module with a script</h2>
+<p>Using a script to create new modules is a great way to save yourself and/or your team time by removing boilerplate.</p>
+<p>We aren&rsquo;t going to dig into a particular script in this post, though I will have a post soon that goes through the one I use for my personal projects.</p>
+<hr>
+<p>After the module is created with the script, running Gradle sync will result in no changes, even though we have a new <code>build.gradle</code> file. This is obvious at this point, and it&rsquo;s because we didn&rsquo;t add the <code>include(...)</code> statement for the new module.</p>
+<p>For an app with a few modules, this isn&rsquo;t a big deal. But as your nesting gets deeper, like it would in a mono-repo, having to add includes that potentially have three or four or even more parts to the module name is less than ideal.</p>
+<blockquote>
+<p><strong><em>NOTE:</em></strong> You might be thinking &ldquo;I can just have my script update the <code>settings.gradle</code> file itself&rdquo;. That&rsquo;s true, and is another option to accomplish this same behavior. I personally find explicit <code>include(...)</code> statements to be fragile, and would rather a dynamic, never-failing method be used, assuming the downsides are minimal/non-existent.</p>
+</blockquote>
+<h3 id="using-the-snippet">Using the snippet</h3>
+<p>By adding the code above to your <code>settings.gradle.kts</code> file, you&rsquo;ll never have to manually write an <code>include(...)</code> statement again.</p>
+<p>Let&rsquo;s walk through it:</p>
+<h3 id="setup">Setup</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> modules = mutableSetOf&lt;String&gt;()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">val</span> ignoredDirectories = setOf(<span style="color:#e6db74">&#34;build&#34;</span>, <span style="color:#e6db74">&#34;buildSrc&#34;</span>, <span style="color:#e6db74">&#34;gradle&#34;</span>, <span style="color:#e6db74">&#34;.idea&#34;</span>)
+</span></span></code></pre></div><p>We start with a mutable Set of Strings that represents each target that needs to be included.</p>
+<p>We can save some time by skipping directories that we know won&rsquo;t have gradle modules.</p>
+<h3 id="find-all-modules">Find all modules</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">fillModules</span>(files: List&lt;File&gt;, targetPath: String) {
+</span></span><span style="display:flex;"><span>    files.forEach { <span style="color:#66d9ef">file</span> <span style="color:#f92672">-&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">file</span>.isFile) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">file</span>.name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;build.gradle&#34;</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">file</span>.name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;build.gradle.kts&#34;</span>) {
+</span></span><span style="display:flex;"><span>                modules.add(targetPath)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (ignoredDirectories.contains(<span style="color:#66d9ef">file</span>.name)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span><span style="color:#a6e22e">@forEach</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> updatedParentPath = <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">$targetPath</span><span style="color:#e6db74">:</span><span style="color:#e6db74">${file.name}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">val</span> childFiles =
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">file</span>.listFiles()<span style="color:#f92672">?.</span>filter { <span style="color:#66d9ef">it</span>.isDirectory <span style="color:#f92672">||</span> <span style="color:#66d9ef">it</span>.name.contains(<span style="color:#e6db74">&#34;.gradle&#34;</span>) }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (childFiles <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) {
+</span></span><span style="display:flex;"><span>                fillModules(childFiles, updatedParentPath)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>fillModules</code> function takes in a List of Files, and the <code>targetPath</code>. This target path will change as we walk deeper into the project&rsquo;s directories. This way, we can support nested modules (e.g. <code>android:feature:home</code>).</p>
+<p>If we find a <code>build.gradle[.kts]</code> file, we know we&rsquo;re in a module and can add the current target to our Set.</p>
+<p>Otherwise we keep walking down the file tree.</p>
+<h3 id="execute">Execute</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">val</span> projectDirectories = checkNotNull(
+</span></span><span style="display:flex;"><span>    rootProject.projectDir.listFiles()
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">?.</span>filter { <span style="color:#66d9ef">it</span>.isDirectory }
+</span></span><span style="display:flex;"><span>) { <span style="color:#e6db74">&#34;No directories in project&#34;</span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>fillModules(
+</span></span><span style="display:flex;"><span>    files = projectDirectories, targetPath = <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>modules.forEach { include(<span style="color:#66d9ef">it</span>) }
+</span></span></code></pre></div><p>Eventually we&rsquo;ve found all targets that have a <code>build.gradle</code> file, and we can simply loop through them and <code>include</code> each one.</p>
+<p>After we create some new library modules with our script, we can run gradle sync and they will be part of our project.</p>
+<p>We can even move them into a nested directory, run sync again, and the module is updated in our project as expected.</p>
+<h2 id="potential-downsides">Potential downsides</h2>
+<h3 id="performance--build-time-impact">Performance / Build time impact</h3>
+<p>When testing performance impact on a project with 86 modules, I noticed no significant downside to this approach. Finding the modules took a few hundred milliseconds on my Intel Macbook Pro (the range was actually quite wide, depending on my computer&rsquo;s mood, though never exceeded 800ms).</p>
+<p>Using this approach also has no impact, from what I could tell, on clean or incremental builds, aside from the time it takes to find the modules.</p>
+<h3 id="selective-include">Selective <code>include</code>?</h3>
+<p>Does this approach limit selective <code>include</code>s? I don&rsquo;t see how, or rather, the same logic that is definining a subset of modules to include in a monorepo could be adapted here. However if you&rsquo;re at that stage, I assume there is already something else driving this process.</p>
+<h2 id="summary">Summary</h2>
+<p>This may seem trivial, but as someone who has a deep addiction to side projects and granular modularity, this is one of my favorite, small quality-of-life changes, coupled with the script to generate modules (which I will have a post on soon).</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-11-28</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://www.brandongogetap.com/posts/gradle-auto-include/" data-title="Gradle Auto Include Modules" data-via="map[id:@bgogetap weight:4]"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://www.brandongogetap.com/posts/gradle-auto-include/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://www.brandongogetap.com/posts/gradle-auto-include/"><i class="fab fa-linkedin fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://www.brandongogetap.com/posts/gradle-auto-include/" data-title="Gradle Auto Include Modules" data-web><i class="fab fa-whatsapp fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://www.brandongogetap.com/posts/gradle-auto-include/" data-title="Gradle Auto Include Modules"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://www.brandongogetap.com/posts/gradle-auto-include/"><i class="fab fa-reddit fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/youtube-channel/" class="prev" rel="prev" title="YouTube Channel"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>YouTube Channel</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Brandon Gogetap</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

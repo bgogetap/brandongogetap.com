@@ -1,7 +1,6 @@
 ---
 title: "YouTube Channel"
 date: 2022-11-26T22:44:29-08:00
-author: "Brandon"
 summary: "Dagger 2 Deep Dive and other Android development videos"
 ---
 
