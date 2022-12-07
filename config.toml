@@ -1,6 +1,8 @@
 baseURL = 'https://www.brandongogetap.com/'
 languageCode = 'en-us'
 title = "Brandon Gogetap | Blog"
+gitRepo = "https://github.com/bgogetap/brandongogetap.com"
+enableGitInfo = true
 description = "Hello"
 theme = 'loveit'
 
