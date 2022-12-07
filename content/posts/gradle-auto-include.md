@@ -108,3 +108,12 @@ Does this approach limit selective `include`s? I don't see how, or rather, the s
 
 ## Summary
 This may seem trivial, but as someone who has a deep addiction to side projects and granular modularity, this is one of my favorite, small quality-of-life changes, coupled with the script to generate modules (which I will have a post on soon).
+
+## Follow Up: Magic == Danger
+I asked about this strategy on Mastodon ([check out thread here](https://mastodon.social/@bgogetap/109424092373947165)) and some valid points were brought up about potential issues. 
+
+If you're using git submodules, this strategy would end up including Gradle modules from those projects that you likely didn't intend to. In the end, this is a case of potentially overly clever logic leading to silent issues that may be hard to debug.
+
+It's something to keep in mind, and this auto-include strategy is clearly not the right choice for every project. I will personally continue using it on my personal projects for a couple reasons:
+- During project ramp-up, I do a lot of refactoring and module creation, and this strategy takes out a small pain-point of that process.
+- Converting to explicit includes is as simple as adding a `println("include(it)")` line in the loop, copying that output, and pasting it in your `settings.gradle.kts` file while deleting/commenting out the auto-include code. In other words, changing from auto-include to explicit-include (maybe once the project is mature) is a dead simple process, so there is no major downside to starting with auto-include.
